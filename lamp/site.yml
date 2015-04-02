@@ -1,0 +1,5 @@
+---
+# file: site.yml
+
+- include: local_dev.yml
+

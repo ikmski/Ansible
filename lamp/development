@@ -1,0 +1,5 @@
+[local_dev]
+localhost
+
+[development:children]
+local_dev

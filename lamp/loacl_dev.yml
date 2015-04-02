@@ -1,0 +1,10 @@
+---
+# file: local_dev.yml
+
+- name: configure and deploy the local development environment
+  hosts: development
+  roles:
+    - common
+    - web
+    - db
+
