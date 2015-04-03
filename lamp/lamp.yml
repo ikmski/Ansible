@@ -1,0 +1,10 @@
+---
+# file: lamp.yml
+
+- name: configure and deploy the LAMP for local development environment
+  hosts: development
+  roles:
+    - common
+    - web
+    - db
+

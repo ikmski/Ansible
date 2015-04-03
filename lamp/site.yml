@@ -1,5 +1,5 @@
 ---
 # file: site.yml
 
-- include: local_dev.yml
+- include: lamp.yml
 
