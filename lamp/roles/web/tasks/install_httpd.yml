@@ -1,1 +1,11 @@
 ---
+- name: "add repository"
+  shell: wget http://repos.fedorapeople.org/repos/jkaluza/httpd24/epel-httpd24.repo
+  args:
+    creates: /etc/yum.repos.d/epel-httpd24.repo
+    chdir: /etc/yum.repos.d/
+  changed_when: false
+
+- name: "install httpd"
+  yum: name=httpd24 state=latest enablerepo=epel-httpd24
+
