@@ -3,8 +3,11 @@
 
 - name: configure and deploy the LAMP for local development environment
   hosts: development
+  user: docker
+  sudo: yes
   roles:
     - common
     - web
     - db
+    - mysetting
 

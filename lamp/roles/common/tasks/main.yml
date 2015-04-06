@@ -1,1 +1,25 @@
 ---
+- name: "install libselinux-python"
+  yum: name=libselinux-python state=present
+
+- name: "install wget"
+  yum: name=wget state=latest
+
+- name: "install git"
+  yum: name=git state=latest
+
+- name: "install mercurial"
+  yum: name=mercurial state=latest
+
+- name: "install vim"
+  yum: name=vim-enhanced state=latest
+
+- name: "install gcc"
+  yum: name=gcc state=latest
+
+- name: "install zip"
+  yum: name=zip state=latest
+
+- name: "install unzip"
+  yum: name=unzip state=latest
+
