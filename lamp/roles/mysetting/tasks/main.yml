@@ -1,3 +1,44 @@
 ---
 
+- name: "add yum repositories"
+  yum: name={{item}}
+  with_items:
+    - http://ftp-srv2.kddilabs.jp/Linux/distributions/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    - http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+    - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+- name: "replace enable paramater in repository config files"
+  replace: dest=/etc/yum.repos.d/{{item}} regexp="enabled *= *1" replace="enabled=0"
+  with_items:
+  - epel.repo
+  - rpmforge.repo
+  - remi.repo
+
+- name: "install zsh"
+  yum: name=zsh state=latest
+
+- name: "uninstall nvie git-flow"
+  yum: pkg=git-flow state=absent
+
+- name: "install git-flow"
+  shell: wget --no-check-certificate -q https://raw.github.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh && bash gitflow-installer.sh install develop
+  args:
+    creates: /user/local/bin/git-flow
+    chdir: /var/tmp
+  changed_when: false
+
+- name: "install vim neobundle"
+  git: repo="https://github.com/Shougo/neobundle.vim" dest="/home/{{username}}/.vim/bundle/neobundle.vim"
+
+- name: "install ctags"
+  yum: name=ctags state=latest
+
+- name: "install tmux"
+  yum: name=tmux state=latest enablerepo=rpmforge
+
+- name: "add user"
+  user: name={{username}} password={{password}} shell=/bin/zsh state=present append=yes
+
+- name: "add sudo user"
+  lineinfile: "dest=/etc/sudoers backup=yes state=present regexp='^{{username}}' line='{{username}} ALL=(ALL) NOPASSWD: ALL'"
 

@@ -1,0 +1,4 @@
+---
+username: ikeda
+password: $1$jdafoiwe$bjsTpSJlf/f81ZfnY1ppH1
+  # openssl passwd -salt <string> -1 p@ssW0rd
