@@ -52,8 +52,6 @@
   changed_when: false
 
 - name: "setup dotfiles"
-  shell: "./setup.sh > /dev/null"
-  args:
-    chdir: /home/{{username}}/dotfiles/
+  shell: "sh /home/{{username}}/dotfiles/setup.sh > /dev/null"
   changed_when: false
 
