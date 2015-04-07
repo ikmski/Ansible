@@ -23,9 +23,6 @@
     chdir: /var/tmp
   changed_when: false
 
-- name: "install vim neobundle"
-  git: repo="https://github.com/Shougo/neobundle.vim" dest="/home/{{username}}/.vim/bundle/neobundle.vim"
-
 - name: "install ctags"
   yum: name=ctags state=latest
 
@@ -37,4 +34,26 @@
 
 - name: "add sudo user"
   lineinfile: "dest=/etc/sudoers backup=yes state=present regexp='^{{username}}' line='{{username}} ALL=(ALL) NOPASSWD: ALL'"
+
+# Vim NeoBundle
+- name: "install vim neobundle"
+  git: repo="https://github.com/Shougo/neobundle.vim" dest="/home/{{username}}/.vim/bundle/neobundle.vim"
+
+- name: "change owner .vim"
+  shell: "chown -R {{username}}:{{username}} /home/{{username}}/.vim"
+  changed_when: false
+
+# Dotfiles
+- name: "git clone dotfiles"
+  git: repo="https://github.com/ikmski/dotfiles.git" dest="/home/{{username}}/dotfiles"
+
+- name: "change owner dotfiles"
+  shell: "chown -R {{username}}:{{username}} /home/{{username}}/dotfiles"
+  changed_when: false
+
+- name: "setup dotfiles"
+  shell: "./setup.sh > /dev/null"
+  args:
+    chdir: /home/{{username}}/dotfiles/
+  changed_when: false
 
