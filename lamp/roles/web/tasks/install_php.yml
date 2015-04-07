@@ -12,5 +12,12 @@
   - remi.repo
 
 - name: "install php"
-  yum: name=php state=latest enablerepo=remi-php55
+  yum: name={{item}} state=latest enablerepo=remi-php55
+  with_items:
+    - php
+    - php-pdo
+    - php-mysqlnd
+    - php-mbstring
+  notify:
+    - restart_httpd
 

@@ -8,4 +8,6 @@
 
 - name: "install httpd"
   yum: name=httpd24 state=latest enablerepo=epel-httpd24
+  notify:
+    - restart_httpd
 
