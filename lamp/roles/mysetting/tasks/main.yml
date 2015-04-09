@@ -23,6 +23,9 @@
     chdir: /var/tmp
   changed_when: false
 
+- name: "install vim"
+  yum: name=vim-enhanced state=latest
+
 - name: "install ctags"
   yum: name=ctags state=latest
 

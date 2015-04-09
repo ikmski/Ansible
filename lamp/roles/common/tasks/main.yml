@@ -11,9 +11,6 @@
 - name: "install mercurial"
   yum: name=mercurial state=latest
 
-- name: "install vim"
-  yum: name=vim-enhanced state=latest
-
 - name: "install gcc"
   yum: name=gcc state=latest
 
